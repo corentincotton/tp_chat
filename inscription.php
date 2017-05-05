@@ -4,7 +4,7 @@ require_once("pdo.php");
 ?>
  <!DOCTYPE html>
 <html>
- <head>
+ <head> 
    <meta charset="UTF-8">
    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
    <script type="text/javascript" src="verification.js"></script>

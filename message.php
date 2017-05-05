@@ -17,12 +17,20 @@ require_once("pdo.php");
       <body>
 		<div>
 			  <div id="messages">
-
+          <?php
+              $req = $PDO->prepare("SELECT *
+                FROM chat");
+                $req->execute();
+                $res = $req->fetchAll();
+                foreach ($res as $data) {
+                  echo $data->pseudo . "" . $data->message;
+                }
+           ?>
 			  </div>
-			  <form method="POST" action="">
+			  <form id="formulaire1" method="POST" action="">
 				  <p> Message :</p>
 				  <!--<div><textarea type="text" name="pseudo" id="pseudo" placeholder="pseudo"></textarea></div> -->
-          <div class="message"><textarea type="text" name="texte" id="texte" placeholder="zone de texte" rows="10" cols="185"></textarea></div>
+          <div class="message"><textarea type="text" name="pseudo" id="texte" placeholder="zone de texte" rows="10" cols="185"></textarea></div>
           <div class="message"><textarea type="text" name="message" id="message" placeholder="message" cols="50 "></textarea></div>
 				  <div><input type="submit" name="mssg" value="Envoyez le message"/></div>
 			  </form>

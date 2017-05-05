@@ -29,14 +29,18 @@ else {
   // echo "tu dois surement etre deja inscrit !";
 }
 
-if(isset($_POST["mssg"])){
-	if($_POST["message"] != "") {
-		$pseudo = htmlspecialchars($_POST['pseudo']);
-    $message = htmlspecialchars($_POST['message']);
-		$insertmsg = $PDO->prepare('INSERT INTO chat(pseudo, message) VALUES(?, ?)');
-		$insertmsg->execute(array($pseudo, $message));
+if(isset($_POST["formulaire1"]) && $_POST["formulaire1"] == "formulaire1"){
+	$req = $PDO->prepare('INSERT INTO chat (message, pseudo) VALUES (:message, :pseudo)');
+	$req->bindValue(":message", $_POST["message"]);
+	$req->bindValue(":pseudo", $_POST["pseudo"]);
+
+	if($req->execute()){
+		echo "nouveau message envoyé";
+	}else{
+		echo "échec de l'envoie !";
 	}
 }
+
 
 
 if(isset($_POST["submit2"])){
@@ -55,6 +59,29 @@ if(isset($_POST["submit2"])){
         echo "tu n'est pas inscrit";
       }
     }
+}
+
+if(isset($_POST["formulaire1"]) && $_POST["formulaire1"] == "formulaire1"){
+	$req = $PDO->prepare('INSERT INTO chat (pseudo, message) VALUES (:pseudo, :message)');
+	$req->bindValue(":pseudo", $_POST["pseudo"]);
+	$req->bindValue(":message", $_POST["message"]);
+
+
+	if($req->execute()){
+		echo "Nouveau message";
+	}else{
+		echo "Une erreur s'est produite !";
+	}
+}
+
+if(isset($_POST["formulaire1"]) && $_POST["formulaire1"] == "getAll"){
+	$req = $PDO->prepare('SELECT * FROM chat');
+	$req->execute();
+	$res = $req->fetchAll();
+
+	foreach($res as $data){
+		echo $data->pseudo . " : " . $data->message;
+	}
 }
 
 

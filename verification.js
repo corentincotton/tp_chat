@@ -10,3 +10,23 @@ $(document).ready(function() {
 
 
 });
+$(function(){
+				$('form#formulaire1').on('submit', function(e){
+					e.preventDefault()
+
+					data = {
+						message : $('#message').val(),
+						pseudo : $('#pseudo').val(),
+						form : "form1"
+					}
+
+					$.ajax({
+						method : "POST",
+						url : "message.php",
+						data : data,
+						success : function(res){
+							$("#msg").html(res)
+						}
+					})
+*
+				})
