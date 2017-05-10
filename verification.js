@@ -11,22 +11,22 @@ $(document).ready(function() {
 
 });
 $(function(){
-				$('form#formulaire1').on('submit', function(e){
-					e.preventDefault()
+	$('form2#formulaire1').on('submit', function(e){
+		e.preventDefault()
 
-					data = {
-						message : $('#message').val(),
-						pseudo : $('#pseudo').val(),
-						form : "form1"
-					}
+		data = {
+			message : $('#message').val(),
+			pseudo : $('#pseudo').val(),
+			form : "formulaire1"
+		}
 
-					$.ajax({
-						method : "POST",
-						url : "message.php",
-						data : data,
-						success : function(res){
-							$("#msg").html(res)
-						}
-					})
-*
-				})
+		$.ajax({
+			method : "POST",
+			url : "pdo.php",
+			data : data,
+			success : function(res){
+				$("#message").html(res)
+			}
+		})
+	})
+})

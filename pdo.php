@@ -1,4 +1,5 @@
 <?php
+require_once "define.php";
 
 try {
   //$PDO = new PDO('mysql:host=localhost;dbname=formulaire_inscription;charset=utf8', 'root', ''); //windows, wampserveur
@@ -47,26 +48,22 @@ if(isset($_POST["submit2"])){
   if($_POST["pseudo"] != ""){
 
     $pseudo = $_POST['pseudo'];
-    $req = $PDO->query("SELECT * FROM TP280417 WHERE pseudo = '$pseudo'");
+    $req = $PDO->prepare("SELECT * FROM TP280417 WHERE :pseudo = pseudo");
+    $req->bindValue(":pseudo", $_POST["pseudo"]);
     $rows = $req->rowCount();
       if ($rows == 1){
-        $req2 = $PDO->query("SELECT nom, prenom FROM TP280417 WHERE pseudo = '$pseudo'");
-        $answer = $req2->fetch();
-        session_start();
-
-        Header('location: message.php');
+        $_SESSION['pseudo'] = $pseudo;
+        header('location: message.php');
       }else {
         echo "tu n'est pas inscrit";
       }
     }
 }
 
-if(isset($_POST["formulaire1"]) && $_POST["formulaire1"] == "formulaire1"){
+if(isset($_POST["form"]) && $_POST["form"] == "formulaire1"){
 	$req = $PDO->prepare('INSERT INTO chat (pseudo, message) VALUES (:pseudo, :message)');
 	$req->bindValue(":pseudo", $_POST["pseudo"]);
 	$req->bindValue(":message", $_POST["message"]);
-
-
 	if($req->execute()){
 		echo "Nouveau message";
 	}else{
@@ -74,7 +71,7 @@ if(isset($_POST["formulaire1"]) && $_POST["formulaire1"] == "formulaire1"){
 	}
 }
 
-if(isset($_POST["formulaire1"]) && $_POST["formulaire1"] == "getAll"){
+if(isset($_POST["form"]) && $_POST["formulaire1"] == "getAll"){
 	$req = $PDO->prepare('SELECT * FROM chat');
 	$req->execute();
 	$res = $req->fetchAll();
@@ -83,6 +80,10 @@ if(isset($_POST["formulaire1"]) && $_POST["formulaire1"] == "getAll"){
 		echo $data->pseudo . " : " . $data->message;
 	}
 }
+
+
+
+
 
 
 

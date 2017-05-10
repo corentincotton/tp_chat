@@ -1,18 +1,19 @@
 <?php
+session_start();
 include_once("define.php");
 require_once("pdo.php");
 ?>
  <!DOCTYPE html>
 <html>
- <head> 
+ <head>
    <meta charset="UTF-8">
    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
    <script type="text/javascript" src="verification.js"></script>
    <link rel="stylesheet" href="/css/css.css" />
    <title> formulaire chat </title>
  </head>
- <body id="imagesfeuille">
-    <div id="center">
+ <body>
+    <div>
        <p> s'inscrire </p>
        <form name="form1" action="" method="POST">
          <input type="text" name="nom" id="nom" placeholder="Nom"><br/>

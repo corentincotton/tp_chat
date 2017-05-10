@@ -5,7 +5,9 @@ require_once("pdo.php");
 //echo "<center>bonjour " .($_POST['pseudo'])." bienvenue dans la zone de chat</center> <br/>";
 
 ?>
+
  <!DOCTYPE html>
+
   <html>
       <head>
       <title> message </title>
@@ -18,8 +20,7 @@ require_once("pdo.php");
 		<div>
 			  <div id="messages">
           <?php
-              $req = $PDO->prepare("SELECT *
-                FROM chat");
+              $req = $PDO->prepare("SELECT * FROM chat");
                 $req->execute();
                 $res = $req->fetchAll();
                 foreach ($res as $data) {
