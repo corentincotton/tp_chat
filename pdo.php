@@ -48,14 +48,15 @@ if(isset($_POST["submit2"])){
   if($_POST["pseudo"] != ""){
 
     $pseudo = $_POST['pseudo'];
-    $req = $PDO->prepare("SELECT * FROM TP280417 WHERE :pseudo = pseudo");
+    $req = $PDO->prepare("SELECT * FROM TP280417 WHERE pseudo = :pseudo");
     $req->bindValue(":pseudo", $_POST["pseudo"]);
+    $req->execute();
     $rows = $req->rowCount();
       if ($rows == 1){
         $_SESSION['pseudo'] = $pseudo;
         header('location: message.php');
       }else {
-        echo "tu n'est pas inscrit";
+        echo "tu n'es pas inscrit";
       }
     }
 }
